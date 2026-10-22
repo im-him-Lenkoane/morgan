@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://morgan26.co.za/sitemap.xml
