@@ -4,7 +4,7 @@ var CONFIG = {
   apply: "",
 instagram: "https://instagram.com/yourcompany",
   x: "https://x.com/yourcompany",
-  facebook: "https://facebook.com/yourcompany"
+  facebook: "https://facebook.com/Morgan26i"
 };
 /* [name, description, label, solid colour, open to everyone?]  Optional images: assets/svc1 ... svc6 */
 var SERVICES = [
