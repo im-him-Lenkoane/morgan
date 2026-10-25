@@ -1,21 +1,25 @@
 /* ====== EDIT THESE ====== */
 var CONFIG = {
-  whatsapp: "https://whatsapp.com/channel/0029VbD6jtsGOj9wdHlK4G0m",                 // country code + number, no + or spaces
-  instagram: "https://instagram.com/_i_morgan",
-  x: "https://x.com/morgan_i_",
-  facebook: "https://https://www.facebook.com/morgan26za/"
+  whatsapp: "27000000000",                 // country code + number, no + or spaces
+  instagram: "https://instagram.com/yourcompany",
+  x: "https://x.com/yourcompany",
+  facebook: "https://facebook.com/yourcompany"
 };
-var WORKS = [
-  ["Bilt Website", "A furniture store with a calm, product-first shopping flow.", "Website", "#d58ba0", "wrk1"],
-  ["Nova Mobile", "A task app for teams that need more than standard workflows.", "Mobile App", "#6a2a5e", "wrk2"],
-  ["Linar Ecosystem", "A sustainability dashboard to track energy use and impact.", "Website", "#7a1d3a", "wrk3"],
-  ["Tranova Platform", "Booking for airport-to-hotel transfers with live tracking.", "Mobile App & Website", "#b4617a", "wrk4"]
+/* [name, description, label, solid colour, open to everyone?]  Optional images: assets/svc1 ... svc6 */
+var SERVICES = [
+  ["Tutoring Classes", "Subject support for learners, one-on-one or in small groups, in person and online.", "Tutoring", "#9a9a9a", false],
+  ["School Transport", "Safe, reliable daily transport so learners get to school and home again on time.", "Transport", "#6e6e6e", false],
+  ["Academic Consultation & Career Guidance", "Advice on subject choices, university and college applications, bursaries and career paths.", "Guidance", "#b0b0b0", false],
+  ["Software Development", "Websites, mobile apps and custom systems built for schools and businesses.", "Software", "#808080", false],
+  ["Computer & Digital Literacy", "An extra-curricular subject: computer basics, the internet, email, office tools and staying safe online.", "Extra-curricular", "#8c8c8c", true],
+  ["Programming Fundamentals", "An extra-curricular subject: how code works, logic, problem-solving and writing your first programs.", "Extra-curricular", "#a6a6a6", true]
 ];
-var WORDS = ["Developer", "Creator", "Designer", "Artist", "Writer","Editor"];
+var WORDS = ["Tutoring Classes", "School Transport", "Career Guidance", "Software Development", "Digital Literacy", "Programming Fundamentals"];
 /* ======================== */
 
 var $ = function (s) { return document.querySelector(s); };
-var EXTS = ["jpg", "jpeg", "png", "webp", "svg"];
+var EXTS = ["jpg", "jpeg", "png", "webp", "svg", "JPG", "JPEG", "PNG", "WEBP"];
+function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
 
 /* try assets/<name>.<ext> for each extension until one loads */
 function probe(name, exts) {
@@ -43,16 +47,18 @@ document.querySelectorAll("[data-link]").forEach(function (a) {
   a.href = k === "whatsapp" ? "https://wa.me/" + CONFIG.whatsapp : CONFIG[k];
 });
 
-/* works */
-$("#list").innerHTML = WORKS.map(function (w) {
-  return '<article class="card"><div class="top"><h3>' + w[0] + '</h3><span class="go">&#8594;</span></div><p>' + w[1] +
-    '</p><span class="tag">' + w[2].replace("&", "&amp;") + '</span><div class="art" style="background:' + w[3] +
-    '"><img data-img="' + w[4] + '" alt="' + w[0] + '"></div></article>';
+/* services */
+$("#list").innerHTML = SERVICES.map(function (s, i) {
+  var msg = encodeURIComponent("Hi Morgan26, I’d like to know more about " + s[0] + ".");
+  return '<article class="card' + (s[4] ? " free" : "") + '">' + (s[4] ? '<span class="ribbon">Open to everyone</span>' : "") +
+    '<h3>' + esc(s[0]) + '</h3><p>' + esc(s[1]) + '</p><span class="tag">' + esc(s[2]) + '</span>' +
+    '<div class="art" style="background:' + s[3] + '"><img data-img="svc' + (i + 1) + '" alt="' + esc(s[0]) + '"></div>' +
+    '<a class="btn sm" target="_blank" rel="noopener" href="https://wa.me/' + CONFIG.whatsapp + '?text=' + msg + '">Enquire on WhatsApp</a></article>';
 }).join("");
 fillImages();
 
-/* routing: #home #works #about */
-var pages = ["home", "works", "about"];
+/* routing: #home #services #about */
+var pages = ["home", "services", "about"];
 function route() {
   var h = (location.hash || "#home").slice(1);
   if (pages.indexOf(h) < 0) h = "home";
@@ -60,7 +66,7 @@ function route() {
   document.querySelectorAll("nav a").forEach(function (a) { a.classList.toggle("on", a.dataset.p === h); });
   setMenu(false);
   window.scrollTo(0, 0);
-  document.title = "Morgan I · " + h[0].toUpperCase() + h.slice(1);
+  document.title = "Morgan26 · " + h[0].toUpperCase() + h.slice(1);
 }
 function setMenu(open) {
   document.body.classList.toggle("open", open);
@@ -77,23 +83,52 @@ document.querySelectorAll("nav a").forEach(function (a) {
 window.addEventListener("hashchange", route);
 route();
 
-/* typewriter */
-var wi = 0, ci = 0, del = false, tw = $("#tw"), ar = $("#art");
+/* typewriter: types and erases each service */
+var wi = 0, ci = 0, del = false, tw = $("#tw");
 var still = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
 function tick() {
   var w = WORDS[wi];
-  ar.textContent = /^[AEIOU]/i.test(w) ? "an" : "a";
-  if (still) { tw.textContent = w; wi = (wi + 1) % WORDS.length; return setTimeout(tick, 2000); }
+  if (still) { tw.textContent = w; wi = (wi + 1) % WORDS.length; return setTimeout(tick, 2200); }
   tw.textContent = w.slice(0, ci) || "\u00a0";
-  var d = del ? 55 : 110;
-  if (!del && ci === w.length) { del = true; d = 1400; }
+  var d = del ? 45 : 90;
+  if (!del && ci === w.length) { del = true; d = 1500; }
   else if (del && ci === 0) { del = false; wi = (wi + 1) % WORDS.length; d = 350; }
   else ci += del ? -1 : 1;
   setTimeout(tick, d);
 }
 tick();
 
-/* swipeable photo stack: abt1, abt2, abt3 ... (up to 12) */
+/* Home: one arched photo, ndx1..ndx10 reveal as you scroll */
+(function () {
+  var stage = $("#stage"), stick = $("#stick"), arch = $("#arch"), slides = [];
+  function update() {
+    if (slides.length < 2) return;
+    var top = parseFloat(getComputedStyle(stick).top) || 0;
+    var dist = stage.offsetHeight - stick.offsetHeight;
+    var p = dist > 0 ? Math.min(1, Math.max(0, (top - stage.getBoundingClientRect().top) / dist)) : 0;
+    var t = Math.min(1, p / 0.88) * (slides.length - 1);
+    slides.forEach(function (s, i) {
+      s.style.zIndex = i;
+      var f = i === 0 ? 1 : Math.min(1, Math.max(0, t - (i - 1)));
+      s.style.clipPath = "inset(" + (100 - f * 100) + "% 0 0 0)";
+    });
+  }
+  (async function () {
+    for (var n = 1; n <= 10; n++) {
+      var src = await probe("ndx" + n, EXTS);
+      if (!src) continue;
+      var im = new Image(); im.src = src; im.className = "slide"; im.alt = n === 1 ? "Morgan26" : "";
+      arch.insertBefore(im, arch.querySelector(".name")); slides.push(im);
+    }
+    stage.style.height = slides.length > 1 ? "calc(100svh - 96px + " + (slides.length - 1) * 80 + "svh)" : "auto";
+    update();
+  })();
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  window.addEventListener("hashchange", function () { setTimeout(update, 0); });
+})();
+
+/* swipeable photo stack on About: abt1, abt2, abt3 ... (up to 12) */
 (function () {
   var deck = $("#deck"), cards = [], busy = false;
   var POS = ["translate(0,0) rotate(0)", "translate(0,16px) scale(.95) rotate(-3deg)", "translate(0,32px) scale(.9) rotate(3deg)"];
@@ -137,7 +172,7 @@ tick();
     function end() {
       if (!on) return; on = false; el.style.transition = "";
       if (Math.abs(dx) > 80) advance(dx > 0 ? 1 : -1);
-      else if (Math.abs(dx) < 6) advance(1);   /* tap */
+      else if (Math.abs(dx) < 6) advance(1);
       else render();
     }
     el.addEventListener("pointerup", end);
@@ -148,7 +183,7 @@ tick();
       var src = await probe("abt" + n, EXTS);
       if (!src) continue;
       var c = document.createElement("div"); c.className = "sc";
-      c.innerHTML = '<img alt="Photo of Morgan ' + n + '" src="' + src + '" draggable="false">';
+      c.innerHTML = '<img alt="Morgan26 photo ' + n + '" src="' + src + '" draggable="false">';
       deck.appendChild(c); cards.push(c); drag(c);
     }
     if (!cards.length) $("#photos").style.display = "none";
@@ -160,34 +195,4 @@ tick();
     if (e.key === "ArrowRight") advance(1);
     if (e.key === "ArrowLeft") advance(-1);
   });
-})();
-/* Home: one arched photo, ndx1..ndx6 reveal as you scroll */
-(function () {
-  var stage = $("#stage"), stick = $("#stick"), arch = $("#arch"), slides = [];
-  function update() {
-    if (slides.length < 2) return;
-    var top = parseFloat(getComputedStyle(stick).top) || 0;
-    var dist = stage.offsetHeight - stick.offsetHeight;
-    var p = dist > 0 ? Math.min(1, Math.max(0, (top - stage.getBoundingClientRect().top) / dist)) : 0;
-    var t = p * (slides.length - 1);
-    slides.forEach(function (s, i) {
-      s.style.zIndex = i;
-      var f = i === 0 ? 1 : Math.min(1, Math.max(0, t - (i - 1)));
-      s.style.clipPath = "inset(" + (100 - f * 100) + "% 0 0 0)";
-    });
-  }
-  (async function () {
-    for (var n = 1; n <= 6; n++) {
-      var src = await probe("ndx" + n, EXTS);
-      if (!src) continue;
-      var im = new Image(); im.src = src; im.className = "slide"; im.alt = n === 1 ? "Morgan I" : "";
-      arch.insertBefore(im, arch.querySelector(".name")); slides.push(im);
-    }
-    stage.style.height = slides.length > 1
-      ? "calc(100svh - 96px + " + (slides.length - 1) * 70 + "svh)" : "auto";
-    update();
-  })();
-  window.addEventListener("scroll", update, { passive: true });
-  window.addEventListener("resize", update);
-  window.addEventListener("hashchange", function () { setTimeout(update, 0); });
 })();
