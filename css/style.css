@@ -23,8 +23,8 @@ main{max-width:760px;margin:0 auto;padding:0 20px}
 /* home hero */
 .stage{position:relative}
 .stick{position:sticky;top:calc(env(safe-area-inset-top,0px) + 76px);height:calc(100svh - 96px - env(safe-area-inset-top,0px));display:flex;flex-direction:column;gap:12px;padding-bottom:8px}
-.arch{position:relative;flex:1;min-height:220px;border-radius:999px 999px 40px 40px;overflow:hidden;background:var(--card);border:2px solid var(--ac)}
-.arch .slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.arch{position:relative;isolation:isolate;flex:none;width:min(100%,max(240px,calc(100svh - 300px)));aspect-ratio:1/1;margin:0 auto;border-radius:40px;overflow:hidden;background:var(--card);border:2px solid var(--ac)}
+.arch .slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform}
 .arch .name{position:absolute;left:0;right:0;bottom:6%;z-index:50;text-align:center;font-size:clamp(52px,19vw,130px);line-height:.9;color:var(--fg);text-shadow:0 2px 28px rgba(0,0,0,.6);pointer-events:none}
 .tagline{text-align:center;font-size:clamp(22px,6vw,40px);line-height:1.15;min-height:3.5em}
 .where{text-align:center;color:var(--mute);font-size:13px}
