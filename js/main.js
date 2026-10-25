@@ -1,7 +1,8 @@
 /* ====== EDIT THESE ====== */
 var CONFIG = {
   whatsapp: "27000000000",                 // country code + number, no + or spaces
-  instagram: "https://instagram.com/yourcompany",
+  apply: "",
+instagram: "https://instagram.com/yourcompany",
   x: "https://x.com/yourcompany",
   facebook: "https://facebook.com/yourcompany"
 };
@@ -46,6 +47,7 @@ document.querySelectorAll("[data-link]").forEach(function (a) {
   var k = a.dataset.link;
   a.href = k === "whatsapp" ? "https://wa.me/" + CONFIG.whatsapp : CONFIG[k];
 });
+$("#apply").href = CONFIG.apply || "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent("Hi Morgan26, I’d like to apply for the 2027 intake.");
 
 /* services */
 $("#list").innerHTML = SERVICES.map(function (s, i) {
@@ -110,7 +112,7 @@ tick();
     slides.forEach(function (s, i) {
       s.style.zIndex = i;
       var f = i === 0 ? 1 : Math.min(1, Math.max(0, t - (i - 1)));
-      s.style.clipPath = "inset(" + (100 - f * 100) + "% 0 0 0)";
+      s.style.transform = "translateX(" + (100 - f * 100) + "%)";
     });
   }
   (async function () {
