@@ -15,7 +15,7 @@ var SERVICES = [
   ["Software Development", "An extra-curricular subject: computer basics, the internet, email, office tools and staying safe online.", "Extra-curricular", "#8c8c8c", true],
   ["Programming Fundamentals", "An extra-curricular subject: how code works, logic, problem-solving and writing your first programs.", "Extra-curricular", "#a6a6a6", true]
 ];
-var WORDS = ["Tutoring Classes", "School Transport", "Career Guidance", "Software Development", "Digital Literacy", "Programming Fundamentals"];
+var WORDS = ["Tutoring Classes", "Mobile phone Repair", "PC Repairs", "PC Upgrade ", "Software Development", "Programming Fundamentals"];
 /* ======================== */
 
 var $ = function (s) { return document.querySelector(s); };
