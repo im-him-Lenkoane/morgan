@@ -9,10 +9,10 @@ instagram: "https://instagram.com/yourcompany",
 /* [name, description, label, solid colour, open to everyone?]  Optional images: assets/svc1 ... svc6 */
 var SERVICES = [
   ["Tutoring Classes", "Subject support for learners, one-on-one or in small groups, in person and online.", "Tutoring", "#9a9a9a", false],
-  ["School Transport", "Safe, reliable daily transport so learners get to school and home again on time.", "Transport", "#6e6e6e", false],
-  ["Academic Consultation & Career Guidance", "Advice on subject choices, university and college applications, bursaries and career paths.", "Guidance", "#b0b0b0", false],
-  ["Software Development", "Websites, mobile apps and custom systems built for schools and businesses.", "Software", "#808080", false],
-  ["Computer & Digital Literacy", "An extra-curricular subject: computer basics, the internet, email, office tools and staying safe online.", "Extra-curricular", "#8c8c8c", true],
+  ["Mobile Phone repairs", "Safe, reliable daily transport so learners get to school and home again on time.", "Transport", "#6e6e6e", false],
+  ["Desktop & Laptop Repairs", "Advice on subject choices, university and college applications, bursaries and career paths.", "Guidance", "#b0b0b0", false],
+  ["Computer Upgrade", "Websites, mobile apps and custom systems built for schools and businesses.", "Software", "#808080", false],
+  ["Software Development", "An extra-curricular subject: computer basics, the internet, email, office tools and staying safe online.", "Extra-curricular", "#8c8c8c", true],
   ["Programming Fundamentals", "An extra-curricular subject: how code works, logic, problem-solving and writing your first programs.", "Extra-curricular", "#a6a6a6", true]
 ];
 var WORDS = ["Tutoring Classes", "School Transport", "Career Guidance", "Software Development", "Digital Literacy", "Programming Fundamentals"];
